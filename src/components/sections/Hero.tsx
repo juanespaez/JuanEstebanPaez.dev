@@ -14,7 +14,7 @@ export function Hero() {
       {/* Tag line */}
       <div className="flex items-center gap-3 font-mono text-xs text-mint tracking-[0.2em] uppercase mb-6 opacity-0 animate-fade-up [animation-delay:0.3s]">
         <span className="w-8 h-px bg-mint" />
-        {t({ en: 'AI · Cloud · Architecture', es: 'IA · Nube · Arquitectura' })}
+        {t({ en: 'AI · Cloud · Data Engineer · Data Scientist · Developer', es: 'IA · Nube · Ingeniero de Datos · Ciencia de Datos · Desarrollador' })}
       </div>
 
       {/* Name */}
@@ -26,7 +26,7 @@ export function Hero() {
       {/* Subtitle */}
       <p className="mt-8 text-lg text-muted max-w-xl leading-relaxed opacity-0 animate-fade-up [animation-delay:0.7s]">
         <strong className="text-snow font-medium">
-          {t({ en: 'Cloud Software Developer', es: 'Desarrollador de Software en la Nube' })}
+          {t({ en: 'Cloud Software Developer And Machine Learning', es: 'Desarrollador de Software en la Nube y Apredenizaje de Maquina' })}
         </strong>
         <br />
         {t({
@@ -38,6 +38,7 @@ export function Hero() {
       {/* CTAs */}
       <div className="flex flex-wrap gap-4 mt-12 opacity-0 animate-fade-up [animation-delay:0.9s]">
         <a href="#projects"
+
           className="px-8 py-3.5 rounded-full bg-grad-br text-bg font-display font-bold text-sm shadow-glow hover:shadow-glow-lg hover:-translate-y-0.5 transition-all duration-200">
           {t({ en: 'View My Work →', es: 'Ver Mi Trabajo →' })}
         </a>
