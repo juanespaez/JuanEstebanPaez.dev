@@ -32,6 +32,7 @@ export const PROJECTS: Project[] = [
       en: 'Identified 3 optimal player profiles through unsupervised learning and statistical validation',
       es: 'Identificación de 3 perfiles de jugadores óptimos mediante aprendizaje no supervisado y validación estadística',
     },
+    githubUrl: 'https://github.com/juanespaez/API-extraction-with-cleaning-and-clustering'
   },
   {
     id: 2,
@@ -49,6 +50,7 @@ export const PROJECTS: Project[] = [
       en: 'Seamless biometric authentication flow with real-time face verification',
       es: 'Flujo de autenticación biométrica fluido con verificación facial en tiempo real',
     },
+    githubUrl: 'https://github.com/juanespaez/Facial_login-with-interface-and-registration-of-attendance-spanish-'
   },
   {
     id: 3,
@@ -66,6 +68,7 @@ export const PROJECTS: Project[] = [
       en: 'Advanced ensemble modeling and deep learning integration for clinical diagnostics',
       es: 'Modelado avanzado de ensamble e integración de deep learning para diagnóstico clínico',
     },
+    githubUrl: 'https://github.com/juanespaez/DataMiningWithModelOnline'
   },
   {
     id: 4,
@@ -80,6 +83,7 @@ export const PROJECTS: Project[] = [
       en: 'Real-world Generative AI integration and LLM API orchestration',
       es: 'Integración real con IA Generativa y orquestación de APIs LLM',
     },
+    githubUrl: 'https://github.com/juanespaez/Virtual_assistent'
   },
   {
     id: 5,
@@ -97,6 +101,7 @@ export const PROJECTS: Project[] = [
       en: 'Clean architecture implementation with automated container orchestration and secure DB user provisioning',
       es: 'Implementación de arquitectura limpia con orquestación de contenedores y provisión segura de usuarios',
     },
+    githubUrl: 'https://github.com/juanespaez/tadb_202420_NoSQL_API'
   },
   {
     id: 6,
@@ -114,6 +119,7 @@ export const PROJECTS: Project[] = [
       en: 'Expert-level database administration with automated default privileges and secure routine management',
       es: 'Administración de base de datos nivel experto con privilegios automáticos y gestión segura de rutinas',
     },
+    githubUrl: 'https://github.com/juanespaez/tadb_202420_SQL_API'
   },
   {
     id: 7,
@@ -131,6 +137,7 @@ export const PROJECTS: Project[] = [
       en: 'Clean UI/UX design with modular component architecture and type-safe development',
       es: 'Diseño UI/UX limpio con arquitectura de componentes modulares y desarrollo tipado',
     },
+    githubUrl: 'https://github.com/juanespaez/LandingPage'
   },
 ]
 

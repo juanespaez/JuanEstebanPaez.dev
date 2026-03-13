@@ -25,39 +25,53 @@ export function Projects() {
 }
 
 function ProjectCard({ project }: { project: Project }) {
-  const { t } = useLanguage()
-  const ref = useScrollReveal()
+    const { t } = useLanguage()
+    const ref = useScrollReveal()
 
-  return (
-    <div ref={ref as React.RefObject<HTMLDivElement>}
-      className="reveal relative bg-bg2/70 border border-blue/15 rounded-3xl p-10 backdrop-blur-sm overflow-hidden hover:border-blue/40 hover:-translate-y-1.5 hover:shadow-card transition-all duration-300 group">
-
-      {/* Background number */}
-      <span className="absolute top-5 right-7 font-display font-extrabold text-7xl text-blue/[0.06] leading-none select-none">
-        0{project.id}
+    return (
+        <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            ref={ref as React.RefObject<HTMLAnchorElement>}
+            className="reveal block relative bg-bg2/70 border border-blue/15 rounded-3xl p-10 backdrop-blur-sm overflow-hidden hover:border-blue/40 hover:-translate-y-2 hover:shadow-card transition-all duration-300 group cursor-pointer"
+        >
+            {/* Background number - Ajustado para manejar números > 9 */}
+            <span className="absolute top-5 right-7 font-display font-extrabold text-7xl text-blue/[0.06] leading-none select-none group-hover:text-blue/[0.12] transition-colors">
+        {project.id < 10 ? `0${project.id}` : project.id}
       </span>
 
-      {/* Icon */}
-      <div className="w-12 h-12 rounded-xl border border-blue/15 bg-gradient-to-br from-blue/15 to-violet/15 flex items-center justify-center text-2xl mb-6">
-        {project.icon}
-      </div>
+            {/* Icon + Floating Arrow (opcional para feedback visual) */}
+            <div className="flex justify-between items-start mb-6">
+                <div className="w-12 h-12 rounded-xl border border-blue/15 bg-gradient-to-br from-blue/15 to-violet/15 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                    {project.icon}
+                </div>
+                <span className="text-blue opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all">
+          ↗
+        </span>
+            </div>
 
-      <h3 className="font-display font-bold text-xl leading-tight mb-3">{t(project.title)}</h3>
-      <p className="text-muted text-sm leading-relaxed mb-6">{t(project.description)}</p>
+            <h3 className="font-display font-bold text-xl leading-tight mb-3 group-hover:text-blue transition-colors">
+                {t(project.title)}
+            </h3>
 
-      <div className="flex flex-wrap gap-1.5 mb-6">
-        {project.tags.map(tag => (
-          <span key={tag}
-            className="px-2.5 py-1 rounded-md border border-violet/20 bg-violet/10 font-mono text-[11px] text-violet">
+            <p className="text-muted text-sm leading-relaxed mb-6">
+                {t(project.description)}
+            </p>
+
+            <div className="flex flex-wrap gap-1.5 mb-6">
+                {project.tags.map(tag => (
+                    <span key={tag}
+                          className="px-2.5 py-1 rounded-md border border-violet/20 bg-violet/10 font-mono text-[11px] text-violet">
             {tag}
           </span>
-        ))}
-      </div>
+                ))}
+            </div>
 
-      <div className="flex gap-2.5 items-start rounded-xl border border-mint/10 bg-mint/5 px-4 py-3 text-mint text-[13px] leading-relaxed">
-        <span className="flex-shrink-0">→</span>
-        <span>{t(project.highlight)}</span>
-      </div>
-    </div>
-  )
+            <div className="flex gap-2.5 items-start rounded-xl border border-mint/10 bg-mint/5 px-4 py-3 text-mint text-[13px] leading-relaxed group-hover:bg-mint/10 transition-colors">
+                <span className="flex-shrink-0">→</span>
+                <span>{t(project.highlight)}</span>
+            </div>
+        </a>
+    )
 }

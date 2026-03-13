@@ -12,6 +12,7 @@ export interface Project {
   description: TranslatedString
   tags: string[]
   highlight: TranslatedString
+  githubUrl: string
 }
 
 export interface SkillCategory {
