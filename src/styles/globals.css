@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base — must be inside @layer base to survive Tailwind preflight */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: #050810;
+  }
+  body {
+    background-color: #050810;
+    color: #F0F4FF;
+    font-family: 'DM Sans', sans-serif;
+    cursor: none;
+  }
+  #root {
+    background-color: #050810;
+    min-height: 100vh;
+  }
+  @media (max-width: 900px) {
+    body { cursor: auto; }
+  }
+}
+
+/* Scroll reveal — driven by IntersectionObserver in JS */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animated scan line inside scroll indicator */
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: #00D4FF;
+  animation: scrollLine 2s ease-in-out infinite;
+}
+
+/* Gradient text — can't be done inline in Tailwind without a plugin */
+.text-grad-br {
+  background: linear-gradient(135deg, #00D4FF, #7B61FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-grad-full {
+  background: linear-gradient(135deg, #00D4FF 0%, #7B61FF 50%, #00FFB2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card hover top-border glow — pseudo-element, can't do in Tailwind */
+.card-glow::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #00D4FF, #7B61FF);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.card-glow:hover::before { opacity: 1; }
