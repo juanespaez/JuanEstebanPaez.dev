@@ -1,15 +1,39 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import { useLanguage } from '@/context/LanguageContext'
-import { useScrollReveal } from '@/hooks/useScrollReveal'
+import { useGSAPScrollReveal } from '@/hooks/useGSAPScrollReveal'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { CONTACT_LINKS } from '@/data'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export function Contact() {
   const { t } = useLanguage()
-  const infoRef = useScrollReveal()
-  const formRef = useScrollReveal()
+  const prefersReduced = useReducedMotion()
+  const infoRef = useGSAPScrollReveal<HTMLDivElement>({ direction: 'left', distance: 60 })
+  const formRef = useGSAPScrollReveal<HTMLDivElement>({ direction: 'right', distance: 60 })
+  const linksContainerRef = useRef<HTMLDivElement>(null)
+
   const [name,  setName]  = useState('')
   const [email, setEmail] = useState('')
   const [msg,   setMsg]   = useState('')
+
+  useGSAP(() => {
+    const el = linksContainerRef.current
+    if (!el || prefersReduced) return
+
+    gsap.from(el.querySelectorAll('.contact-link'), {
+      opacity: 0,
+      x: -20,
+      stagger: 0.07,
+      duration: 0.5,
+      ease: 'power2.out',
+      delay: 0.3,
+      scrollTrigger: { trigger: el, start: 'top 82%', once: true },
+    })
+  }, { scope: linksContainerRef, dependencies: [prefersReduced] })
 
   const handleSend = () => {
     if (!name || !email || !msg) {
@@ -31,7 +55,7 @@ export function Contact() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
         {/* Info */}
-        <div ref={infoRef as React.RefObject<HTMLDivElement>} className="reveal">
+        <div ref={infoRef}>
           <h2 className="font-display font-extrabold text-[clamp(36px,4vw,52px)] leading-[1.1] mb-5">
             {t({ en: "Let's Build", es: 'Construyamos' })}<br />
             {t({ en: 'Something Great', es: 'Algo Grande' })}
@@ -42,10 +66,10 @@ export function Contact() {
               es: 'Estoy abierto a roles remotos internacionales, oportunidades en Medellín y proyectos freelance. Si tienes un proyecto o quieres conectar, siempre estoy disponible.',
             })}
           </p>
-          <div className="flex flex-col gap-4">
+          <div ref={linksContainerRef} className="flex flex-col gap-4">
             {CONTACT_LINKS.map(link => (
               <a key={link.label} href={link.href} target="_blank" rel="noreferrer"
-                className="flex items-center gap-4 px-5 py-4 bg-bg2/70 border border-blue/15 rounded-2xl backdrop-blur-sm hover:border-blue hover:translate-x-1.5 transition-all duration-300">
+                className="contact-link flex items-center gap-4 px-5 py-4 bg-bg2/70 border border-blue/15 rounded-2xl backdrop-blur-sm hover:border-blue hover:translate-x-1.5 transition-all duration-300">
                 <div className="w-10 h-10 rounded-xl bg-blue/10 flex items-center justify-center text-lg flex-shrink-0">
                   {link.icon}
                 </div>
@@ -59,8 +83,8 @@ export function Contact() {
         </div>
 
         {/* Form */}
-        <div ref={formRef as React.RefObject<HTMLDivElement>}
-          className="reveal bg-bg2/70 border border-blue/15 rounded-3xl p-10 backdrop-blur-sm">
+        <div ref={formRef}
+          className="bg-bg2/70 border border-blue/15 rounded-3xl p-10 backdrop-blur-sm">
           {[
             { label: t({ en: 'YOUR NAME', es: 'TU NOMBRE' }), value: name,  set: setName,  type: 'text',  ph: 'John Doe' },
             { label: t({ en: 'YOUR EMAIL', es: 'TU EMAIL' }), value: email, set: setEmail, type: 'email', ph: 'john@company.com' },

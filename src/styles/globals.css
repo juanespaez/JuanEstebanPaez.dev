@@ -58,6 +58,12 @@
   background-clip: text;
 }
 
+/* GPU-compositing layer for 3D tilt cards */
+.tilt-card {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
 /* Card hover top-border glow — pseudo-element, can't do in Tailwind */
 .card-glow::before {
   content: '';

@@ -1,12 +1,60 @@
+import { useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import { useLanguage } from '@/context/LanguageContext'
-import { useScrollReveal } from '@/hooks/useScrollReveal'
+import { useGSAPScrollReveal } from '@/hooks/useGSAPScrollReveal'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { STATS, SPOKEN_LANGUAGES } from '@/data'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export function About() {
   const { t } = useLanguage()
-  const titleRef  = useScrollReveal()
-  const textRef   = useScrollReveal()
-  const statsRef  = useScrollReveal()
+  const prefersReduced = useReducedMotion()
+
+  const titleRef = useGSAPScrollReveal<HTMLHeadingElement>({ direction: 'left', distance: 50, start: 'top 88%' })
+  const textRef = useGSAPScrollReveal<HTMLDivElement>({ direction: 'left', distance: 40, start: 'top 85%' })
+  const statsRef = useRef<HTMLDivElement>(null)
+
+  useGSAP(() => {
+    const el = statsRef.current
+    if (!el) return
+
+    if (prefersReduced) {
+      gsap.set(el.querySelectorAll('.stat-card'), { opacity: 1, y: 0, clearProps: 'all' })
+      return
+    }
+
+    const trigger = { trigger: el, start: 'top 80%', once: true }
+
+    el.querySelectorAll('.stat-value').forEach(node => {
+      const raw = node.textContent ?? ''
+      const num = parseInt(raw)
+      if (!isNaN(num)) {
+        const obj = { val: 0 }
+        const suffix = raw.replace(String(num), '')
+        gsap.to(obj, {
+          val: num,
+          duration: 1.8,
+          ease: 'power1.out',
+          snap: { val: 1 },
+          onUpdate: () => { node.textContent = Math.round(obj.val) + suffix },
+          scrollTrigger: trigger,
+        })
+      }
+    })
+
+    gsap.from(el.querySelectorAll('.stat-card'), {
+      opacity: 0,
+      y: 30,
+      scale: 0.96,
+      stagger: 0.1,
+      duration: 0.7,
+      ease: 'power3.out',
+      scrollTrigger: trigger,
+    })
+  }, { scope: statsRef, dependencies: [prefersReduced] })
 
   return (
     <section id="about" className="relative z-10 px-[10vw] py-28">
@@ -14,15 +62,15 @@ export function About() {
         {t({ en: 'WHO I AM', es: 'QUIÉN SOY' })}
       </p>
 
-      <h2 ref={titleRef as React.RefObject<HTMLHeadingElement>}
-        className="reveal font-display font-extrabold text-[clamp(36px,5vw,60px)] leading-[1.05] tracking-tight mb-12">
+      <h2 ref={titleRef}
+        className="font-display font-extrabold text-[clamp(36px,5vw,60px)] leading-[1.05] tracking-tight mb-12">
         {t({ en: 'Architect of', es: 'Arquitecto de' })}<br />
         {t({ en: 'Intelligent Systems', es: 'Sistemas Inteligentes' })}
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         {/* Text */}
-        <div ref={textRef as React.RefObject<HTMLDivElement>} className="reveal space-y-5">
+        <div ref={textRef} className="space-y-5">
           {[
             t({ en: "I'm a Data Science Engineering student at", es: 'Soy estudiante de Ingeniería en Ciencia de Datos en la' })
               + ' Universidad Pontificia Bolivariana '
@@ -46,11 +94,10 @@ export function About() {
         </div>
 
         {/* Stats */}
-        <div ref={statsRef as React.RefObject<HTMLDivElement>} className="reveal grid grid-cols-2 gap-5">
+        <div ref={statsRef} className="grid grid-cols-2 gap-5">
           {STATS.map(s => (
-            <div key={s.value}
-              className="bg-bg2/70 border border-blue/15 rounded-2xl p-7 backdrop-blur-sm hover:border-blue hover:-translate-y-1 transition-all duration-300">
-              <div className="font-display font-extrabold text-4xl text-grad-br leading-none mb-2">{s.value}</div>
+            <div key={s.value} className="stat-card bg-bg2/70 border border-blue/15 rounded-2xl p-7 backdrop-blur-sm hover:border-blue hover:-translate-y-1 transition-all duration-300">
+              <div className="stat-value font-display font-extrabold text-4xl text-grad-br leading-none mb-2">{s.value}</div>
               <div className="font-mono text-[11px] text-muted tracking-widest uppercase">{t(s.label)}</div>
             </div>
           ))}

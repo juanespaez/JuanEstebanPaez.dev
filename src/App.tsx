@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { LanguageProvider } from '@/context/LanguageContext'
 import { NeuralBackground } from '@/components/ui/NeuralBackground'
 import { Cursor } from '@/components/ui/Cursor'
@@ -11,6 +13,10 @@ import { Education } from '@/components/sections/Education'
 import { Contact } from '@/components/sections/Contact'
 
 export default function App() {
+  useEffect(() => {
+    document.fonts.ready.then(() => ScrollTrigger.refresh())
+  }, [])
+
   return (
     <LanguageProvider>
       <Cursor />
