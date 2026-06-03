@@ -12,7 +12,6 @@ export function Hero() {
   const prefersReduced = useReducedMotion()
 
   const sectionRef = useRef<HTMLElement>(null)
-  const badgeRef = useRef<HTMLDivElement>(null)
   const taglineRef = useRef<HTMLDivElement>(null)
   const headlineRef = useRef<HTMLHeadingElement>(null)
   const subtitleRef = useRef<HTMLParagraphElement>(null)
@@ -23,7 +22,7 @@ export function Hero() {
   useGSAP(() => {
     if (prefersReduced) {
       gsap.set(
-        [badgeRef.current, taglineRef.current, headlineRef.current, subtitleRef.current, ctasRef.current, scrollRef.current],
+        [taglineRef.current, headlineRef.current, subtitleRef.current, ctasRef.current, scrollRef.current],
         { opacity: 1, x: 0, y: 0, scale: 1, clearProps: 'all' }
       )
       return
@@ -31,8 +30,7 @@ export function Hero() {
 
     const tl = gsap.timeline({ defaults: { ease: 'power2.out' } })
 
-    tl.from(badgeRef.current, { opacity: 0, y: 20, duration: 0.6 })
-      .from(taglineRef.current, { opacity: 0, x: -15, duration: 0.5 }, '-=0.4')
+    tl.from(taglineRef.current, { opacity: 0, x: -15, duration: 0.5 })
       .from(headlineRef.current!.querySelectorAll('span.word'), {
         opacity: 0, y: 40, duration: 0.7, stagger: 0.07, ease: 'expo.out',
       }, '-=0.3')
@@ -53,7 +51,6 @@ export function Hero() {
           [headlineRef, -80],
           [subtitleRef, -50],
           [ctasRef, -30],
-          [badgeRef, -20],
         ]
         layers.forEach(([refObj, yEnd]) => {
           if (!refObj.current) return
@@ -74,11 +71,6 @@ export function Hero() {
 
   return (
     <section ref={sectionRef} id="hero" className="relative z-10 min-h-screen flex flex-col justify-center px-[10vw] pt-24">
-      {/* Status badge */}
-      <div ref={badgeRef} className="flex items-center gap-2 w-fit mb-8 px-4 py-2 rounded-full border border-mint/20 bg-mint/5 font-mono text-xs text-mint">
-        <span className="w-2 h-2 rounded-full bg-mint animate-pulse-dot" />
-        {t({ en: 'Open to Work · Medellín, Colombia', es: 'Disponible · Medellín, Colombia' })}
-      </div>
 
       {/* Tag line */}
       <div ref={taglineRef} className="flex items-center gap-3 font-mono text-xs text-mint tracking-[0.2em] uppercase mb-6">
