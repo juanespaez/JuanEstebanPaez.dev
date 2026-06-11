@@ -22,10 +22,10 @@ export function Cursor() {
 
   return (
     <>
-      <div className="fixed top-0 left-0 w-3 h-3 rounded-full bg-blue pointer-events-none z-[9999] mix-blend-screen hidden md:block"
+      <div className="fixed top-0 left-0 w-3 h-3 rounded-full bg-ember pointer-events-none z-[9999] mix-blend-screen hidden md:block"
         style={{ transform: `translate(${x - 6}px, ${y - 6}px)` }} />
       <div ref={ringRef}
-        className="fixed top-0 left-0 w-9 h-9 rounded-full border border-blue/50 pointer-events-none z-[9998] hidden md:block transition-[width,height] duration-300" />
+        className="fixed top-0 left-0 w-9 h-9 rounded-full border border-ember/50 pointer-events-none z-[9998] hidden md:block transition-[width,height] duration-300" />
     </>
   )
 }

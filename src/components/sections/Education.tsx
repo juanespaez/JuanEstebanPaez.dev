@@ -8,7 +8,7 @@ export function Education() {
 
   return (
     <section id="education" className="relative z-10 px-[10vw] py-28">
-      <p className="flex items-center gap-3 font-mono text-[11px] text-blue tracking-[0.25em] uppercase mb-4 before:content-[''] before:w-6 before:h-px before:bg-blue">
+      <p className="flex items-center gap-3 font-mono text-[11px] text-ember tracking-[0.25em] uppercase mb-4 before:content-[''] before:w-6 before:h-px before:bg-ember">
         {t({ en: 'WHERE I STUDY', es: 'DÓNDE ESTUDIO' })}
       </p>
       <h2 ref={titleRef} className="font-display font-extrabold text-[clamp(36px,5vw,60px)] leading-[1.05] tracking-tight mb-12">
@@ -16,10 +16,10 @@ export function Education() {
       </h2>
 
       <div ref={cardRef}
-        className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 bg-bg2/70 border border-blue/15 rounded-3xl p-12 backdrop-blur-sm hover:border-blue/30 transition-all duration-300">
+        className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 bg-bg2/70 border border-ember/15 rounded-3xl p-12 backdrop-blur-sm hover:border-ember/30 transition-all duration-300">
         <div>
           <h3 className="font-display font-bold text-2xl mb-2">Universidad Pontificia Bolivariana</h3>
-          <p className="font-mono text-sm text-blue mb-3">
+          <p className="font-mono text-sm text-ember mb-3">
             {t({ en: 'B.S. Data Science Engineering · Medellín, Colombia', es: 'Ing. en Ciencia de Datos · Medellín, Colombia' })}
           </p>
           <p className="text-muted text-sm leading-relaxed max-w-xl">
@@ -29,7 +29,7 @@ export function Education() {
             })}
           </p>
         </div>
-        <div className="font-display font-extrabold text-5xl text-blue/10 whitespace-nowrap hidden md:block">UPB</div>
+        <div className="font-display font-extrabold text-5xl text-ember/10 whitespace-nowrap hidden md:block">UPB</div>
       </div>
     </section>
   )
