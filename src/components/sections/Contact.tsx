@@ -45,11 +45,11 @@ export function Contact() {
     window.open(`mailto:juanespg03@gmail.com?subject=${subject}&body=${body}`)
   }
 
-  const inputCls = "w-full bg-blue/[0.04] border border-blue/15 rounded-xl px-4 py-3.5 text-snow font-body text-sm outline-none focus:border-blue transition-colors duration-300 placeholder:text-muted resize-none"
+  const inputCls = "w-full bg-ember/[0.04] border border-ember/15 rounded-xl px-4 py-3.5 text-cream font-body text-sm outline-none focus:border-ember transition-colors duration-300 placeholder:text-muted resize-none"
 
   return (
     <section id="contact" className="relative z-10 px-[10vw] py-28">
-      <p className="flex items-center gap-3 font-mono text-[11px] text-blue tracking-[0.25em] uppercase mb-4 before:content-[''] before:w-6 before:h-px before:bg-blue">
+      <p className="flex items-center gap-3 font-mono text-[11px] text-ember tracking-[0.25em] uppercase mb-4 before:content-[''] before:w-6 before:h-px before:bg-ember">
         {t({ en: 'GET IN TOUCH', es: 'CONTÁCTAME' })}
       </p>
 
@@ -69,13 +69,13 @@ export function Contact() {
           <div ref={linksContainerRef} className="flex flex-col gap-4">
             {CONTACT_LINKS.map(link => (
               <a key={link.label} href={link.href} target="_blank" rel="noreferrer"
-                className="contact-link flex items-center gap-4 px-5 py-4 bg-bg2/70 border border-blue/15 rounded-2xl backdrop-blur-sm hover:border-blue hover:translate-x-1.5 transition-all duration-300">
-                <div className="w-10 h-10 rounded-xl bg-blue/10 flex items-center justify-center text-lg flex-shrink-0">
+                className="contact-link flex items-center gap-4 px-5 py-4 bg-bg2/70 border border-ember/15 rounded-2xl backdrop-blur-sm hover:border-ember hover:translate-x-1.5 transition-all duration-300">
+                <div className="w-10 h-10 rounded-xl bg-ember/10 flex items-center justify-center text-lg flex-shrink-0">
                   {link.icon}
                 </div>
                 <div>
                   <span className="block font-mono text-[10px] text-muted tracking-widest uppercase mb-0.5">{link.label}</span>
-                  <span className="text-snow text-sm">{link.display}</span>
+                  <span className="text-cream text-sm">{link.display}</span>
                 </div>
               </a>
             ))}
@@ -84,7 +84,7 @@ export function Contact() {
 
         {/* Form */}
         <div ref={formRef}
-          className="bg-bg2/70 border border-blue/15 rounded-3xl p-10 backdrop-blur-sm">
+          className="bg-bg2/70 border border-ember/15 rounded-3xl p-10 backdrop-blur-sm">
           {[
             { label: t({ en: 'YOUR NAME', es: 'TU NOMBRE' }), value: name,  set: setName,  type: 'text',  ph: 'John Doe' },
             { label: t({ en: 'YOUR EMAIL', es: 'TU EMAIL' }), value: email, set: setEmail, type: 'email', ph: 'john@company.com' },

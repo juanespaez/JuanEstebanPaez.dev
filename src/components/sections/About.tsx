@@ -58,7 +58,7 @@ export function About() {
 
   return (
     <section id="about" className="relative z-10 px-[10vw] py-28">
-      <p className="flex items-center gap-3 font-mono text-[11px] text-blue tracking-[0.25em] uppercase mb-4 before:content-[''] before:w-6 before:h-px before:bg-blue">
+      <p className="flex items-center gap-3 font-mono text-[11px] text-ember tracking-[0.25em] uppercase mb-4 before:content-[''] before:w-6 before:h-px before:bg-ember">
         {t({ en: 'WHO I AM', es: 'QUIÉN SOY' })}
       </p>
 
@@ -84,10 +84,10 @@ export function About() {
           <div className="flex flex-wrap gap-3 pt-4">
             {SPOKEN_LANGUAGES.map(l => (
               <div key={l.name}
-                className="flex items-center gap-2 px-4 py-2 rounded-full border border-violet/25 bg-violet/10 text-sm text-snow">
+                className="flex items-center gap-2 px-4 py-2 rounded-full border border-coral/25 bg-coral/10 text-sm text-cream">
                 <span>{l.flag}</span>
                 <span>{l.name}</span>
-                <span className="font-mono text-[10px] text-violet">{l.cert}</span>
+                <span className="font-mono text-[10px] text-coral">{l.cert}</span>
               </div>
             ))}
           </div>
@@ -96,7 +96,7 @@ export function About() {
         {/* Stats */}
         <div ref={statsRef} className="grid grid-cols-2 gap-5">
           {STATS.map(s => (
-            <div key={s.value} className="stat-card bg-bg2/70 border border-blue/15 rounded-2xl p-7 backdrop-blur-sm hover:border-blue hover:-translate-y-1 transition-all duration-300">
+            <div key={s.value} className="stat-card bg-bg2/70 border border-ember/15 rounded-2xl p-7 backdrop-blur-sm hover:border-ember hover:-translate-y-1 transition-all duration-300">
               <div className="stat-value font-display font-extrabold text-4xl text-grad-br leading-none mb-2">{s.value}</div>
               <div className="font-mono text-[11px] text-muted tracking-widest uppercase">{t(s.label)}</div>
             </div>

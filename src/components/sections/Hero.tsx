@@ -73,8 +73,8 @@ export function Hero() {
     <section ref={sectionRef} id="hero" className="relative z-10 min-h-screen flex flex-col justify-center px-[10vw] pt-24">
 
       {/* Tag line */}
-      <div ref={taglineRef} className="flex items-center gap-3 font-mono text-xs text-mint tracking-[0.2em] uppercase mb-6">
-        <span className="w-8 h-px bg-mint" />
+      <div ref={taglineRef} className="flex items-center gap-3 font-mono text-xs text-gold tracking-[0.2em] uppercase mb-6">
+        <span className="w-8 h-px bg-gold" />
         {t({ en: 'AI · Cloud · Data Engineer · Data Scientist · Developer', es: 'IA · Nube · Ingeniero de Datos · Ciencia de Datos · Desarrollador' })}
       </div>
 
@@ -90,7 +90,7 @@ export function Hero() {
 
       {/* Subtitle */}
       <p ref={subtitleRef} className="mt-8 text-lg text-muted max-w-xl leading-relaxed">
-        <strong className="text-snow font-medium">
+        <strong className="text-cream font-medium">
           {t({ en: 'Cloud Software Developer And Machine Learning', es: 'Desarrollador de Software en la Nube y Apredenizaje de Maquina' })}
         </strong>
         <br />
@@ -107,11 +107,11 @@ export function Hero() {
           {t({ en: 'View My Work →', es: 'Ver Mi Trabajo →' })}
         </a>
         <a href="#contact"
-          className="px-8 py-3.5 rounded-full border border-blue/15 text-snow font-display font-semibold text-sm backdrop-blur-sm hover:border-blue hover:text-blue transition-all duration-300">
+          className="px-8 py-3.5 rounded-full border border-ember/15 text-cream font-display font-semibold text-sm backdrop-blur-sm hover:border-ember hover:text-ember transition-all duration-300">
           {t({ en: 'Get In Touch', es: 'Contáctame' })}
         </a>
         <a href="https://github.com/juanespaez" target="_blank" rel="noreferrer"
-          className="px-8 py-3.5 rounded-full border border-blue/15 text-snow font-display font-semibold text-sm backdrop-blur-sm hover:border-blue hover:text-blue transition-all duration-300">
+          className="px-8 py-3.5 rounded-full border border-ember/15 text-cream font-display font-semibold text-sm backdrop-blur-sm hover:border-ember hover:text-ember transition-all duration-300">
           GitHub ↗
         </a>
       </div>

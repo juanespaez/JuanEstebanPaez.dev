@@ -9,14 +9,14 @@ const LINKS = [
 export function Footer() {
   const { t } = useLanguage()
   return (
-    <footer className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-4 px-[10vw] py-10 border-t border-blue/15">
+    <footer className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-4 px-[10vw] py-10 border-t border-ember/15">
       <p className="font-mono text-xs text-muted">
         {t({ en: '© 2025 Juan Esteban Paez Gil · Medellín, Colombia', es: '© 2025 Juan Esteban Paez Gil · Medellín, Colombia' })}
       </p>
       <div className="flex gap-6">
         {LINKS.map(l => (
           <a key={l.label} href={l.href} target="_blank" rel="noreferrer"
-            className="font-mono text-xs text-muted hover:text-blue transition-colors duration-300">
+            className="font-mono text-xs text-muted hover:text-ember transition-colors duration-300">
             {l.label}
           </a>
         ))}

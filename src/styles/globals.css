@@ -6,16 +6,21 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #050810;
+    background-color: #0E0806;
   }
   body {
-    background-color: #050810;
-    color: #F0F4FF;
+    background-color: #0E0806;
+    /* Warm ambient glows behind the neural canvas */
+    background-image:
+      radial-gradient(ellipse 80% 55% at 75% -10%, rgba(255, 138, 61, 0.10), transparent 70%),
+      radial-gradient(ellipse 65% 45% at 5% 105%, rgba(255, 94, 91, 0.07), transparent 70%);
+    background-attachment: fixed;
+    color: #FFF4E8;
     font-family: 'DM Sans', sans-serif;
     cursor: none;
   }
   #root {
-    background-color: #050810;
+    background: transparent;
     min-height: 100vh;
   }
   @media (max-width: 900px) {
@@ -40,19 +45,19 @@
   position: absolute;
   top: 0; left: -100%;
   width: 100%; height: 100%;
-  background: #00D4FF;
+  background: #FF8A3D;
   animation: scrollLine 2s ease-in-out infinite;
 }
 
 /* Gradient text — can't be done inline in Tailwind without a plugin */
 .text-grad-br {
-  background: linear-gradient(135deg, #00D4FF, #7B61FF);
+  background: linear-gradient(135deg, #FF8A3D, #FF5E5B);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 .text-grad-full {
-  background: linear-gradient(135deg, #00D4FF 0%, #7B61FF 50%, #00FFB2 100%);
+  background: linear-gradient(135deg, #FFC24B 0%, #FF8A3D 50%, #FF5E5B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -64,14 +69,41 @@
   transform-style: preserve-3d;
 }
 
-/* Card hover top-border glow — pseudo-element, can't do in Tailwind */
+/* Card hover top-border glow — pseudo-element, can't do in Tailwind.
+   Inset from the edges so it works without overflow-hidden
+   (overflow-hidden would flatten the 3D depth layers). */
 .card-glow::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
+  top: 0; left: 10%; right: 10%;
   height: 2px;
-  background: linear-gradient(90deg, #00D4FF, #7B61FF);
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #FF8A3D, #FF5E5B, transparent);
   opacity: 0;
   transition: opacity 0.3s;
 }
 .card-glow:hover::before { opacity: 1; }
+
+/* Glare highlight that follows the cursor on tilted cards.
+   --gx / --gy are set by useCardTilt on mousemove. */
+.tilt-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--gx, 50%) var(--gy, 50%),
+    rgba(255, 194, 75, 0.22),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.tilt-card:hover .tilt-glare { opacity: 1; }
+
+/* Depth layers inside tilt cards — content floats above the card plane */
+.card-depth    { transform: translateZ(35px); }
+.card-depth-lg { transform: translateZ(55px); }
+@media (prefers-reduced-motion: reduce) {
+  .card-depth, .card-depth-lg { transform: none; }
+}
