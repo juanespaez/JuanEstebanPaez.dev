@@ -81,8 +81,9 @@ export function NeuralBackground() {
 
     function transform(n: Node3D) {
       const camZ = scrollY * 0.003
-      const rotX = (mouseY - 0.5) * 0.3
-      const rotY = (mouseX - 0.5) * 0.3
+      // Mouse parallax + continuous slow drift so the scene moves on its own
+      const rotX = (mouseY - 0.5) * 0.3 + Math.sin(frame * 0.0015) * 0.06
+      const rotY = (mouseX - 0.5) * 0.3 + frame * 0.0006
       let { x, y, z } = n
       z -= camZ
       const cosY = Math.cos(rotY), sinY = Math.sin(rotY)
@@ -94,7 +95,7 @@ export function NeuralBackground() {
       return project(x2, y2, z3)
     }
 
-    const COLORS = ['#00D4FF', '#7B61FF', '#00FFB2']
+    const COLORS = ['#FF8A3D', '#FF5E5B', '#FFC24B']
 
     function draw() {
       frame++
@@ -111,7 +112,7 @@ export function NeuralBackground() {
       // Grid floor
       ctx.save()
       ctx.globalAlpha = 0.06
-      ctx.strokeStyle = '#00D4FF'
+      ctx.strokeStyle = '#FF8A3D'
       ctx.lineWidth = 0.5
       const camZ = scrollY * 0.003
       for (let i = -20; i <= 20; i++) {
@@ -133,7 +134,7 @@ export function NeuralBackground() {
         const alpha = (1 - dist / 0.6) * 0.3 * Math.min(a.scale, b.scale) * 2
         ctx.save()
         ctx.globalAlpha = Math.min(Math.max(alpha, 0), 0.5)
-        ctx.strokeStyle = '#7B61FF'
+        ctx.strokeStyle = '#FF5E5B'
         ctx.lineWidth = 0.5
         ctx.beginPath(); ctx.moveTo(a.sx, a.sy); ctx.lineTo(b.sx, b.sy); ctx.stroke()
         ctx.restore()
@@ -151,9 +152,9 @@ export function NeuralBackground() {
         const py = a.sy + (b.sy - a.sy) * p.t
         ctx.save()
         ctx.globalAlpha = 0.8
-        ctx.fillStyle = '#00FFB2'
+        ctx.fillStyle = '#FFC24B'
         ctx.shadowBlur = 6
-        ctx.shadowColor = '#00FFB2'
+        ctx.shadowColor = '#FFC24B'
         ctx.beginPath(); ctx.arc(px, py, 1.5, 0, Math.PI * 2); ctx.fill()
         ctx.restore()
       })
